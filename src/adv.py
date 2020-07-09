@@ -1,7 +1,5 @@
-from room import Room
-from player import Player
- 
-# Declare all the rooms
+from room0 import Room
+from player0 import Player
 
 room = {
     'outside':  Room("You find yourself Outside Cave Entrance",
@@ -22,14 +20,7 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers; an open, empty chest stands on a platform at the end of the room.
 There are vines growing up through cracks in the walls, continuing through a sizeable hole
 in the crumbling stone ceiling. The only exit is to the south."""),
-
-    'secret': Room("You have discovered Chelsea's Top-Secret Hideout!", """hey! what do you think \
-you're doing here?? didn't that treasure room description say the only exit was SOUTH?? \
-how did you even get IN here? do you even know the password??!""")
 }
-
-
-# Link rooms together
 
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
@@ -39,58 +30,20 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
-room['treasure'].u_to = room['secret']
-room['secret'].d_to = room['treasure']
 
-#
-# Main
-#
-name = input('WHAT... is your name? \n\n...')
-# Make a new player object that is currently in the 'outside' room.
-player = Player(name)
-player.set_current_room(room['outside'])
-print(f'\nwelcome to adventure, {player.name}!!')
-player.print_descr()
+player = Player(room['outside'])
 
-
-# define plausible inputs
-def valid_input(input):
-    valid_inputs = ['n', 's', 'e', 'w', 'u', 'd']
-    if input not in valid_inputs:
-        return False
-    return True
-# define how stuff happens
-def do_thing(input, player):
-    
-    if input == 'q':
-        print('ok!')
-        exit()
-    else:
-        if player.move(input): # case sensitivity?
-            player.print_descr()
-        else:
-            print('I\'m sorry Dave; I\'m afraid I can\'t do that.\
-                \n[that was invalid input... try again!]')
-
-
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * valid commands are n s e w
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+valid_dir = ['n', 's', 'e', 'w']
 
 while True:
+    # sanitize input (whitespace, case, split)
+    print(f'{player.location}\n')
+    command = input('whatchu wanna do? ').strip().lower().split()
+    command = command[0]
+    if command == 'q':
+        exit()
 
-    user_input = input('\nyour choice: ')
-
-    if not valid_input(user_input):
-        print('invalid entry; reattmpt?')
-        continue
-
-    do_thing(user_input, player)
+    if command in valid_dir:
+        # check
+        # go there
+        player.try_dir(command)
