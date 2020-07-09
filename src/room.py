@@ -24,20 +24,5 @@ class Room():
         
         output += f'\n\nchoose a direction (such as n, s, e, w)'
 
-#        output += f'\n\nAvailable paths [{self.available_path()}]'
-
         return output
     
-    # def available_path(self):
-    #     path_list = []
-
-    #     if self.n_to:
-    #         path_list.append('n')
-    #     if self.s_to:
-    #         path_list.append('s')
-    #     if self.e_to:
-    #         path_list.append('e')
-    #     if self.w_to:
-    #         path_list.append('w')
-
-    #     return ", ".join(path_list)
