@@ -1,5 +1,5 @@
-from room0 import Room
-from player0 import Player
+from room import Room
+from player import Player
 
 room = {
     'outside':  Room("You find yourself Outside Cave Entrance",
