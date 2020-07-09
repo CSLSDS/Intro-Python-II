@@ -56,6 +56,8 @@ player.print_descr()
 # define plausible inputs
 def valid_input(input):
     valid_inputs = ['n', 's', 'e', 'w', 'u', 'd']
+    if input not in valid_inputs:
+        return False
     return True
 # define how stuff happens
 def do_thing(input, player):
