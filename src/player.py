@@ -1,6 +1,9 @@
+from room import Room
+
 class Player():
-    def __init__(self, location):
+    def __init__(self, location, inv=[]):
         self.location = location
+        self.inv = inv
 
     def try_dir(self, command):
         attribute = command + '_to'
@@ -12,3 +15,8 @@ class Player():
             self.location = getattr(self.location, attribute)
         else:
             print('you can\'t go there')
+
+    def get_item(self, item):
+        return self.inv.append(item)
+    def rem_item(self, item):
+        return self.inv.remove(item)
